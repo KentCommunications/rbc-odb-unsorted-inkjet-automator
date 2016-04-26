@@ -1,11 +1,17 @@
 #Region ;**** Directives created by AutoIt3Wrapper_GUI ****
 #AutoIt3Wrapper_Compression=4
 #EndRegion ;**** Directives created by AutoIt3Wrapper_GUI ****
-#include<string.au3>
-#include<Array.au3>
-#include<File.au3>
+#include <string.au3>
+#include <Array.au3>
+#include <File.au3>
 #include <TaskMasterBuild.au3>
 
+
+## Declare paths as variables
+#  Location of inkject mount point 
+#  Should be a UNC path as a string.
+
+$inkjetPath = "\\stash\inkjet\"
 
 if $CmdLine[0] <> "" then
 	$inFile = $CmdLine[1] ; If file dragged onto app, use that as VJ001 file.
@@ -22,8 +28,8 @@ $inkjet = ""
 
 while Not $continue
 	$jobnumber = InputBox("Job Number",$prompt & "Please enter the Job Number:",$jobnumber) ; Prompt user for total number of codes to place into the 1UP file.
-	$inkjet = "\\kcimail2\inkjet\" & StringRight($jobnumber,5) & ".1UP"
-	$inkjetR = "\\kcimail2\inkjet\" & StringRight($jobnumber,5) & "R.1UP"
+	$inkjet = $inkjetPath & StringRight($jobnumber,5) & ".1UP"
+	$inkjetR = $inkjetPath & StringRight($jobnumber,5) & "R.1UP"
 	if Not FileExists($inkjet) then
 		$continue = True
 	else
@@ -79,7 +85,7 @@ func printForColleen()
 	FileWriteLine($printout,"Layout:")
 	FileWriteLine($printout,"line 1   :PRESORT SEQ")
 	FileWriteLine($printout,"line 2   :ENTITY ID")
-    FileWriteLine($printout,"line 3   :LABEL ADDRESS 1")
+     FileWriteLine($printout,"line 3   :LABEL ADDRESS 1")
 	FileWriteLine($printout,"line 4   :LABEL ADDRESS 2")
 	FileWriteLine($printout,"line 5   :LABEL ADDRESS 3")
 	FileWriteLine($printout,"line 6   :LABEL ADDRESS 4")
